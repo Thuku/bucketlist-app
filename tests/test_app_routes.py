@@ -23,7 +23,7 @@ class FlaskAppTestCase(unittest.TestCase):
 
     def test_create_bucket_route(self):
         response = self.app.post('/create')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     def test_dashboard(self):
         response = self.app.get('/dashboard')
