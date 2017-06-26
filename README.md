@@ -1,4 +1,5 @@
 # Buckelist Application
+[![Build Status](https://travis-ci.org/Thuku/bucketlist-app.svg?branch=master)](https://travis-ci.org/Thuku/bucketlist-app)
 ## Description
      
      This application allows a person to create bucketlists and add
@@ -7,7 +8,7 @@
 ## Installation
         clone this repository
         install the dependencies in requirements file
-    ### In windows run the follwing commands after installing dependencies
+### In windows run the follwing commands after installing dependencies
             set FLASK_APP = run.py
             set FLASK_DEBUG = 1
             flask run
