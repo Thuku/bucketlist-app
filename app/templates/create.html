@@ -1,0 +1,29 @@
+{% extends "base_dashboard.html" %} {% block content %}
+<div>
+    {% if message in get_flashed_messages()%}
+    <div id="flash_message" class="card-panel d50000 lighten-2">
+        {%for message in get_flashed_messages()%} {{message}} {% endfor %}
+    </div>
+    {%endif%} {% if error %}
+    <div id="flash_message" class="card-panel red lighten-2">
+
+        <p class="error"> <strong>Error!</strong>{{error}}</p>
+    </div>
+
+    {% endif %}
+    <form action="/create" method="post">
+        <p>
+            <label for="name" required>Bucket list title</label>
+            <input name="bucketlist_name" type="text">
+
+        </p>
+        <p>
+            <button class="btn waves-effect waves-light" type="submit">Create bucket list
+                                    <i class="material-icons right"></i>
+                                </button>
+        </p>
+        </p>
+
+    </form>
+</div>
+{% endblock %}

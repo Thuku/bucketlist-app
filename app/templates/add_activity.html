@@ -1,0 +1,66 @@
+{% extends "base_dashboard.html" %} {% block content %}
+<!--Add flash messages-->
+{%for message in get_flashed_messages()%}
+<div id="flash_message" class="card-panel green lighten-2">
+    {{message}}
+</div>
+{% endfor %} {% if error %}
+<div id="flash_message" class="card-panel red lighten-2">
+
+    <p class="error"> <strong>Error!</strong>{{error}}</p>
+</div>
+
+{% endif %}
+<div>
+    <div class="top-nav">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a class="page-title">{{ title }}</a>
+            </div>
+        </div>
+    </div>
+
+    <form action="/add_activity" method="post">
+        <p>
+            <label for="name" required>Activity</label>
+            <input name="activity" type="text">
+            <input name="title" value="{{ title }}" hidden>
+
+        </p>
+        <p>
+            <button class="btn waves-effect waves-light" type="submit">Add Activity
+                    <i class="material-icons right"></i>
+                </button>
+        </p>
+        </p>
+
+    </form>
+</div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in data %}
+
+            <tr>
+                <td>{{ item['key'] }}</td>
+                <td>{{ item['value'] }}</td>
+                
+                <td></td>
+                <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Remove from Bucketlist">
+                <a href="{{'/remove_item/' + item['value']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">delete</i></a>
+            </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+{% endblock %}

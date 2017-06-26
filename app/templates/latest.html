@@ -1,0 +1,33 @@
+{% extends "base_dashboard.html" %} {% block content %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Bucket list</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for bucketlist in data %}
+
+        <tr>
+            <td>{{data.index(bucketlist)+1}}</td>
+            <td>{{ bucketlist['name'] }}</td>
+            <td>{{ bucketlist['status'] }}</td>
+            <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Manage your bucket list">
+                <a href="{{'/add_activity/' + bucketlist['name']}}" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons">folder_open</i></a>
+            </td>
+            <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Mark as complete">
+                <a href="{{'/mark_complete/' + bucketlist['name']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">check</i></a>
+            </td>
+             <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Delete Bucketlist">
+                <a href="{{'/delete/' + bucketlist['name']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}

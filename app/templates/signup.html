@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<div class="container center-align">
+    <div>
+        {% if message in get_flashed_messages()%}
+        <div id="flash_message" class="card-panel d50000 lighten-2">
+            {%for message in get_flashed_messages()%} {{message}} {% endfor %}
+        </div>
+        {%endif%} {% if error %}
+        <div id="flash_message" class="card-panel red lighten-2">
+
+            <p class="error"> <strong>Error!</strong>{{error}}</p>
+        </div>
+
+        {% endif %}
+
+        <form action="/signup" method="post">
+            <p>
+                <label for="email" required>Email address:</label>
+                <input name="email" type="email">
+
+            </p>
+            <p>
+                <label for="password" required>Password:</label>
+                <input name="password" type="password">
+            </p>
+            <p>
+                <label for="password" required>Confirm password:</label>
+                <input name="confirm_password" type="password">
+            </p>
+            <br>
+            <p>
+
+                <button class="btn waves-effect waves-light" type="submit">Signup
+                        <i class="material-icons right"></i>
+                </button>
+            </p>
+            <p>
+                <label for="" class="right">Alredy have an account<a href="/"> <button class="waves-effect waves-teal btn-flat" style="text-color:alert">Login
+                        </a></label>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+{% endblock %}
