@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>
+        BucketList
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/materialize.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="center-align blue darken-3 " role="navigation">
+            <div class="nav-wrapper container">
+                <label style="font-size:200%;" for="">BucketList Application</label>
+
+            </div>
+        </nav>
+        <!--Child template-->
+        {% block content %}
+        <!--Content from other pages fit here-->
+        {% endblock %}
+        <!--errors-->
+        
+        <!--messagess-->
+
+    </div>
+
+
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+<script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+<script>
+    // A $( document ).ready() block.
+    $(document).ready(function () {
+    setTimeout(function(){
+        $('#flash_message').fadeOut(1000);
+    },3000);
+    });
+
+</script>
+
+</html>

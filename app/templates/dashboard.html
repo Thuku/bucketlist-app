@@ -1,0 +1,68 @@
+{% extends "base_dashboard.html" %} {% block content %}
+<!--flash messages-->
+{%for message in get_flashed_messages()%}
+<div id="flash_message" class="card-panel green lighten-2">
+    {{message}}
+</div>
+{% endfor %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Bucket list</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for bucketlist in data %}
+
+        <tr>
+            <td>{{data.index(bucketlist)+1}}</td>
+            <td>{{ bucketlist['name'] }}</td>
+            <td>{{ bucketlist['status'] }}</td>
+            <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Manage your bucket list">
+                <a href="{{'/add_activity/' + bucketlist['name']}}" class="btn-floating btn-large waves-effect waves-light teal"><i class="material-icons">folder_open</i></a>
+            </td>
+            <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Mark as complete">
+                <a href="{{'/mark_complete/' + bucketlist['name']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">check</i></a>
+            </td>
+            <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Rename Bucketlist">
+                <a data-target="modal{{data.index(bucketlist)+1}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">mode_edit</i></a>
+                <!-- Modal Structure -->
+
+            </td>
+            <div id="modal{{data.index(bucketlist)+1}}" class="modal">
+                <div class="modal-content">
+                    <p class="centre-align">
+                        <h5>Current name: {{bucketlist['name']}}</h5>
+                    </p>
+                    <form action="/rename" method="post">
+
+                        <p>
+                            <label required>New Bucketlist Name</label>
+                            <input type="text" name="name">
+                            <input type="text" name="title" value="{{bucketlist['name']}}" hidden>
+
+                        </p>
+                        <div class="modal-footer">
+                            <p>
+                                <button class="btn waves-effect waves-light" type="submit">Rename
+                                        <i class="material-icons right"></i>
+                                    </button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Delete Bucketlist">
+                <a href="{{'/delete/' + bucketlist['name']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+{% endblock %}
