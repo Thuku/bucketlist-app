@@ -43,11 +43,14 @@ class User(object):
         return password.isalnum()
 
     def get_userid(self, email):
+        """
+        Get user id
+        """
         for user in self.users:
             if user["email"] == email:
                 return user["user_id"]
-    # login a user
 
+    # login a user
     def login(self, email, password):
         """
         Login a user
