@@ -1,11 +1,12 @@
 {% extends "base_dashboard.html" %} {% block content %}
 <div>
     {% if message in get_flashed_messages()%}
-    <div id="flash_message" class="card-panel d50000 lighten-2">
+    <div id="flash_message" class="card-panel d50000 lighten-2" style="position: absolute; top: 50; margin-left: auto; 
+margin-right: auto;">
         {%for message in get_flashed_messages()%} {{message}} {% endfor %}
     </div>
     {%endif%} {% if error %}
-    <div id="flash_message" class="card-panel red lighten-2">
+    <div id="flash_message" class="card-panel red lighten-2" style="position: absolute; top: 50; width :50%">
 
         <p class="error"> <strong>Error!</strong>{{error}}</p>
     </div>
