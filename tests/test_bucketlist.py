@@ -1,8 +1,13 @@
-from app import bucket, user
+"""
+Test Bucketlist class
+"""
 import unittest
-
+from app import bucket, user
 
 class BucketlistTestCase(unittest.TestCase):
+    """
+    Test various functions in bucketlist class
+    """
 
     def setUp(self):
         self.user = user.User()
@@ -13,6 +18,9 @@ class BucketlistTestCase(unittest.TestCase):
 
     # Test bucketlist is created correctly
     def test_create_bucket(self):
+        """
+        Create a bucketlist
+        """
         email = "thuku.bonnie@gmail.com"
         password = "password"
         self.user.create_user(email, password)
