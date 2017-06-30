@@ -33,13 +33,13 @@ class BucketList(object):
         """
         Check if a similar bucketlist already exists
         """
-        # loop through all bucketlists 
+        # loop through all bucketlists
         # check if bucketlist already exists
         for bucketlist in self.bucketlists:
             if bucketlist["name"] == name:
                 return True
-        else:
-            return False
+
+        return False
 
     def get_users_buckets(self, user_id):
         """
@@ -60,7 +60,7 @@ class BucketList(object):
         for i, bucketlist in enumerate(self.bucketlists):
             if bucketlist['name'] == title:
                 self.bucketlists.pop(i)
-                break
+                return "Bucket removed"
 
     def mark_as_complete(self, name):
         """
@@ -70,6 +70,7 @@ class BucketList(object):
         for bucketlist in self.bucketlists:
             if bucketlist["name"] == name:
                 bucketlist.update([("status", "Complete")])
+                return "Bucket complete"
 
     def inprogress_bucketlist(self, user_id):
         """
@@ -115,3 +116,4 @@ class BucketList(object):
         for bucketlist in self.bucketlists:
             if bucketlist["name"] == title:
                 bucketlist.update([("name", name)])
+                return "Bucket renamed"

@@ -1,7 +1,7 @@
 """
 Bucketlist Activity controller
 """
-from app.bucketlist import BucketList
+from models.bucketlist import BucketList
 
 
 class Activity(object):
