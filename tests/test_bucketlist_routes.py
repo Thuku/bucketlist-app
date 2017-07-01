@@ -25,9 +25,8 @@ class AppTestCase(unittest.TestCase):
         Login without registration
         """
         tester = app.test_client(self)
-        email = 'ebso24vi@gmail.com'
         response = tester.post(
-            '/login', data=dict(email, password='root'), follow_redirects=True)
+            '/login', data=dict(email='ebso24vi@gmail.com', password='root'), follow_redirects=True)
         print(response.data)
         self.assertIn(b'Email does not exist. Please sign up', response.data)
 
