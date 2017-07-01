@@ -1,6 +1,5 @@
 # Buckelist Application
-[![Build Status](https://travis-ci.org/Thuku/bucketlist-app.svg?branch=master)](https://travis-ci.org/Thuku/bucketlist-app)
-[![Coverage Status](https://coveralls.io/repos/github/Thuku/bucketlist-app/badge.svg)](https://coveralls.io/github/Thuku/bucketlist-app)
+[![Build Status](https://travis-ci.org/Thuku/bucketlist-app.svg?branch=develop)](https://travis-ci.org/Thuku/bucketlist-app)[![Coverage Status](https://coveralls.io/repos/github/Thuku/bucketlist-app/badge.svg)](https://coveralls.io/github/Thuku/bucketlist-app)
 [![Coverage Status](https://coveralls.io/repos/github/Thuku/bucketlist-app/badge.svg?branch=develop)](https://coveralls.io/github/Thuku/bucketlist-app?branch=develop)
 ## Description
      
