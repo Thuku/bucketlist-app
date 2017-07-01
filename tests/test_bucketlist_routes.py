@@ -5,7 +5,7 @@ import unittest
 from app import app
 
 
-class AppTestCase(unittest.TestCase):
+class AppRoutesTestCase(unittest.TestCase):
     """
     Check response data in routes
     """
