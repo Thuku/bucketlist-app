@@ -8,14 +8,16 @@ class Activity(object):
     """
     Activity class
     """
+
     def add_activity(self, title, name):
         """
         This method adds an activity to a bucketlist
         """
+        activity = {"name": name}
         for bucketlist in BucketList.bucketlists:
             if bucketlist['name'] == title:
                 bucket_activity = bucketlist["activities"]
-                bucket_activity.append(name)
+                bucket_activity.append(activity)
 
     def get_bucket_items(self, name):
         """
@@ -33,7 +35,7 @@ class Activity(object):
         print(user_id, title)
         for bucketlist in BucketList.bucketlists:
             if bucketlist['user_id'] == user_id:
-                bucket_activity = bucketlist["activities"]
+                bucketlist["activities"] = [
+                    d for d in bucketlist["activities"] if d['name'] != title]
                 name = bucketlist['name']
-                bucket_activity.remove(title)
         return name

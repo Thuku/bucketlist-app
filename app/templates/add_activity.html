@@ -49,12 +49,12 @@
             {% for item in data %}
 
             <tr>
-                <td>{{ item['key'] }}</td>
-                <td>{{ item['value'] }}</td>
+                <td>{{data.index(item)+1}}</td>
+                <td>{{ item['name'] }}</td>
                 
                 <td></td>
                 <td class="fixture good tooltipped" id="ines" data-position="top" data-delay="50" data-tooltip="Remove from Bucketlist">
-                <a href="{{'/remove_item/' + item['value']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">delete</i></a>
+                <a href="{{'/remove_item/' + item['name']}}" class="btn-floating btn-large waves-effect blue"><i class="material-icons">delete</i></a>
             </td>
             </tr>
             {% endfor %}

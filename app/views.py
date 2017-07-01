@@ -314,11 +314,8 @@ def get_bucketname(title):
     items = bucket_item.get_bucket_items(title)
 
     # create a list of dictionaries for these items
-    bucket_items_dict = []
-    for i, item in enumerate(items):
-        item = {"key": i + 1, "value": items[i]}
-        bucket_items_dict.append(item)
-    return render_template("add_activity.html", data=bucket_items_dict, title=title)
+    print(items)
+    return render_template("add_activity.html", data=items, title=title)
 
 
 @app.route('/logout')
