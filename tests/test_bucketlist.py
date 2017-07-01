@@ -57,7 +57,7 @@ class BucketlistTestCase(unittest.TestCase):
         self.test_create_bucket()
         response = self.bucket.delete("run wild")
         self.assertEqual(response, "Bucket removed")
-    
+
     def test_mark_as_complete(self):
         """
         Test mark a bucket as complete

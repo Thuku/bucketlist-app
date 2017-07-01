@@ -23,9 +23,9 @@ class BucketList(object):
         bl_id = len(self.bucketlists) + 1
 
         # create new bucketlist
-        new_bucketlist = {"id": bl_id, "user_id": user_id,
-                          "name": name, "activities": activity, "status": status}
-        self.bucketlists.append(new_bucketlist)
+        new_bucket = {"id": bl_id, "user_id": user_id,
+                      "name": name, "activities": activity, "status": status}
+        self.bucketlists.append(new_bucket)
         print(self.bucketlists)
         return "Bucketlist Created"
 
