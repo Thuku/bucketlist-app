@@ -1,17 +1,15 @@
 from flask import Flask
-from app.user  import User
-from app.bucketlist import BucketList
-from app.activity import Activity
+from models.user import User
+from models.bucketlist import BucketList
+from models.activity import Activity
 
 app = Flask(__name__, instance_relative_config=True)
 app.secret_key = "theseahamthatyouwillnevergettounderstand"
 
 
-
-
-user_instance=User()
-bucket=BucketList()
-bucket_item=Activity()
+user_instance = User()
+bucket = BucketList()
+bucket_item = Activity()
 
 from app import views
 

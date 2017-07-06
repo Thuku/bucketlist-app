@@ -31,9 +31,8 @@ class User(object):
                 print(type(user["email"]))
                 print(type(email))
                 return True
-                break
-        else:
-            return False
+            else:
+                return False
 
     # Check if a password is alphanumeric
     def check_password_is_alphnum(self, password):
@@ -43,11 +42,14 @@ class User(object):
         return password.isalnum()
 
     def get_userid(self, email):
+        """
+        Get user id
+        """
         for user in self.users:
             if user["email"] == email:
                 return user["user_id"]
-    # login a user
 
+    # login a user
     def login(self, email, password):
         """
         Login a user
@@ -56,5 +58,5 @@ class User(object):
             if email in dict.values(user):
                 if password == user["password"]:
                     return True
-        else:
-            return False
+                else:
+                    return False

@@ -2,11 +2,11 @@
 <div style="z-index:-1 !important;" class="container center-align">
     <div>
         {%for message in get_flashed_messages()%}
-        <div style="z-index:1 !important;" id="flash_message" class="card-panel green lighten-2">
+        <div style="position: absolute; top: 50; width :50%" id="flash_message" class="card-panel green lighten-2">
             {{message}}
         </div>
         {% endfor %} {% if error %}
-        <div style="z-index:1 !important;" id="flash_message" class="card-panel red lighten-2">
+        <div style="position: absolute; top: 50; width :50%" id="flash_message" class="card-panel red lighten-2">
 
             <p class="error"> <strong>Error!</strong>{{error}}</p>
         </div>
@@ -31,12 +31,14 @@
                         <i class="material-icons right"></i>
                     </button>
             </p>
-            <p>
+
+        </form>
+        <div>   
+             <p>
                 <label for="" class="right">New user sign up here<a href="/signup"> <button class="waves-effect waves-teal btn-flat" style="text-color:alert">Sign Up
                         </a></label>
             </p>
-
-        </form>
+        </div>
     </div>
 
 </div>

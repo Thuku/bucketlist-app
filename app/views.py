@@ -1,5 +1,10 @@
-from flask import g, flash, render_template, request, redirect, url_for, session
+"""
+Views controller
+"""
 from functools import wraps
+from flask import flash, render_template
+from flask import request, redirect, url_for, session
+
 from app import app, user_instance, bucket, bucket_item
 
 
@@ -17,6 +22,9 @@ def login_required(f):
 @app.route('/dashboard')
 @login_required
 def dashboard():
+    """
+    Dashboard
+    """
     email = session['email']
     user_id = user_instance.get_userid(email)
     buckets = bucket.get_users_buckets(user_id)
@@ -25,6 +33,9 @@ def dashboard():
 
 @app.route('/')
 def home():
+    """
+    Home page
+    """
     return render_template('index.html')
 
 
@@ -68,7 +79,7 @@ def signup():
         # create a new user
         else:
             user_instance.create_user(email, password)
-            flash('You have successfully registered. Sign in into your Account')
+            flash('Registration successful. Sign in into your Account')
             return redirect(url_for('home'))
 
     return render_template('signup.html')
@@ -99,7 +110,6 @@ def login():
             session['email'] = request.form['email']
             session['logged_in'] = True
             flash("You have successfully logged in!")
-            user_id = user_instance.get_userid(email)
             return redirect(url_for('dashboard'))
 
         # Return error for incorrect password
@@ -112,11 +122,14 @@ def login():
 @app.route('/create', methods=['GET', 'POST'])
 @login_required
 def create():
+    """
+    Create a bucketlist
+    """
     if request.method == 'POST':
         name = request.form['bucketlist_name']
 
         # Check if name is empty
-        if name == '':
+        if name.strip() == '':
             error = "Bucket list name can not be empty"
             return render_template('create.html', error=error)
 
@@ -130,6 +143,7 @@ def create():
             error = "Bucketlist with similar name already exists"
             return render_template('create.html', error=error)
         else:
+            # Create a bucketlist
             email = session['email']
             user_id = user_instance.get_userid(email)
             bucket.create_bucketlist(name, user_id)
@@ -142,16 +156,30 @@ def create():
 @app.route('/rename', methods=['GET', 'POST'])
 @login_required
 def rename():
+    """
+    Rename a bucketlist
+    """
+    # if user is posting data
     if request.method == "POST":
+
+        # get data from rename form
         name = request.form['name']
         title = request.form['title']
         print(name, title)
-        if name == '':
+
+        # check if name field is empty
+        if name.strip() == '':
             flash("Bucket list name can not be empty")
+
+        # Check if name is alphanumeric
         elif name.isalnum() is False:
             flash("Bucketlist name cannot contain special characters")
+
+        # check if name already exists
         elif bucket.check_if_bucketlist_exists(name) is True:
             flash("Bucketlist with similar name already exists")
+
+        # Rename buckketlist
         else:
             bucket.rename(title, name)
             flash("You have renamed your bucketlist")
@@ -162,6 +190,10 @@ def rename():
 @app.route('/delete/<title>')
 @login_required
 def delete(title):
+    """
+    Delete a bucketlist
+    """
+    # Delete bucketlist using title as name
     bucket.delete(title)
     flash("You have deleted your bucketlist")
     return redirect(url_for('dashboard'))
@@ -170,9 +202,16 @@ def delete(title):
 @app.route('/remove_item/<title>')
 @login_required
 def remove_item(title):
+    """
+    Remove an item from a bucketlist
+    """
+    # get email fro the session
     email = session['email']
     print(email)
+    # get user's id using their email
     user_id = user_instance.get_userid(email)
+
+    # remove item from bucketlist and return bucketlist name
     name = bucket_item.remove_item(user_id, title)
     flash("Bucketlist activity deleted")
     return redirect(url_for('get_bucketname', title=name))
@@ -181,6 +220,10 @@ def remove_item(title):
 @app.route('/mark_complete/<title>')
 @login_required
 def mark_complete(title):
+    """
+    Mark a bucketlist as complete
+    """
+    # Change bucketlist status to incomplete
     bucket.mark_as_complete(title)
     flash("Congratulations on completing " + title + " Bucket list")
     return redirect(url_for('dashboard'))
@@ -189,8 +232,13 @@ def mark_complete(title):
 @app.route('/newbucketlists')
 @login_required
 def latest_buckets():
+    """
+    This returns three latest bucketlists a user has creates
+    """
     email = session['email']
     user_id = user_instance.get_userid(email)
+
+    # Get latest bucketlist
     latest = bucket.latest_bucketlists(user_id)
     return render_template('latest.html', data=latest)
 
@@ -198,8 +246,13 @@ def latest_buckets():
 @app.route('/completed')
 @login_required
 def completed():
+    """
+    Returns completed bucketlists
+    """
     email = session['email']
     user_id = user_instance.get_userid(email)
+
+    # completed bucketlists of a given user
     completed_buckets = bucket.completed_bucketlist(user_id)
     return render_template('completed.html', data=completed_buckets)
 
@@ -207,8 +260,13 @@ def completed():
 @app.route('/inprogress')
 @login_required
 def inprogress():
+    """
+    Returns bucketlists whose status is 'inprogress'
+    """
     email = session['email']
     user_id = user_instance.get_userid(email)
+
+    # in progress bucketlists of a given user
     inprogress_buckets = bucket.inprogress_bucketlist(user_id)
     return render_template('inprogress.html', data=inprogress_buckets)
 
@@ -216,14 +274,29 @@ def inprogress():
 @app.route('/add_activity', methods=['GET', 'POST'])
 @login_required
 def add_activity():
+    """
+    Add activity to a bucketlist
+    """
+
+    # Check if user is posting data
     if request.method == "POST":
         item = request.form['activity']
+
+        # Name o the bucketlist
         name = request.form['title']
+
+        # Get items of the bucketlist
         items = bucket_item.get_bucket_items(name)
+
+        # Check if an item with similar name exists
         if item in items:
             flash("Activity already exists")
+
+        # Check if item is blank
         elif item.strip() == '':
             flash("Activity can not be empty")
+
+        # Add activity to bucketlist
         else:
             bucket_item.add_activity(name, item)
             flash("Activity added successfuly")
@@ -234,12 +307,15 @@ def add_activity():
 @app.route('/add_activity/<title>')
 @login_required
 def get_bucketname(title):
+    """
+    Returns bucketname and its activiteis(items)
+    """
+    # Get items of a bucketlist
     items = bucket_item.get_bucket_items(title)
-    bucket_items_dict = []
-    for i, item in enumerate(items):
-        item = {"key": i + 1, "value": items[i]}
-        bucket_items_dict.append(item)
-    return render_template("add_activity.html", data=bucket_items_dict, title=title)
+
+    # create a list of dictionaries for these items
+    print(items)
+    return render_template("add_activity.html", data=items, title=title)
 
 
 @app.route('/logout')
@@ -248,6 +324,7 @@ def logout():
     """
     Logout a user
     """
+    # remove a user from session
     session.pop('logged_in', None)
     flash('You have successfully loged out')
     return redirect(url_for('home'))

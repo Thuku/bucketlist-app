@@ -1,7 +1,7 @@
 {% extends "base_dashboard.html" %} {% block content %}
 <!--flash messages-->
 {%for message in get_flashed_messages()%}
-<div id="flash_message" class="card-panel green lighten-2">
+<div id="flash_message" class="card-panel green lighten-2" style="position: absolute; top: 50; width :50%">
     {{message}}
 </div>
 {% endfor %}

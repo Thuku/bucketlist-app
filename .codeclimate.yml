@@ -1,0 +1,11 @@
+engines:
+  eslint:
+    enabled: false
+  csslint:
+    enabled: false
+  duplication:
+    enabled: false
+    config:
+      languages:
+      - python
+      - javascript
