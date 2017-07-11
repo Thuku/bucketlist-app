@@ -134,9 +134,9 @@ def create():
             return render_template('create.html', error=error)
 
         # Check if name is alphanumeric
-        elif name.isalnum() is False:
-            error = "Bucket list name can not Contain special characters"
-            return render_template('create.html', error=error)
+        # elif name.isalnum() is False:
+        #     error = "Bucket list name can not Contain special characters"
+        #     return render_template('create.html', error=error)
 
         # check if a buckelist with similar name exists
         elif bucket.check_if_bucketlist_exists(name) is True:
